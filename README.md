@@ -1,4 +1,3 @@
-# Za-Warudo
-My 1st repository on Github
+# My 1st repository here
 
-Za Warudo! 頭七又偷馬咧! 
+Hi there! I am using Github now.
