@@ -6,7 +6,7 @@ Subject: ICT
 
 Made By: Tse Tsz Chun John, 4H (11)
 
-Assisted by teacher Mr. Ma Kai Shing Edward
+With Assistance of teacher Mr. Ma Kai Shing Edward
 
 Project start date: 28 Feb 2018
 
