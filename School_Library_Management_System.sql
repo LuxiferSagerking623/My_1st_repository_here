@@ -29,7 +29,7 @@ GO
 	CREATE TABLE tbl_book_loans (
 		book_loans_LoansID INT PRIMARY KEY NOT NULL IDENTITY (1,1),
 		book_loans_BookID INT NOT NULL CONSTRAINT fk_book_id1 FOREIGN KEY REFERENCES tbl_book(book_BookID) ON UPDATE CASCADE ON DELETE CASCADE,
-		book_loans_StudentID INT NOT NULL CONSTRAINT fk_cardno FOREIGN KEY REFERENCES tbl_borrower(borrower_StudentID) ON UPDATE CASCADE ON DELETE CASCADE,
+		book_loans_StudentID INT NOT NULL CONSTRAINT fk_studentid FOREIGN KEY REFERENCES tbl_borrower(borrower_StudentID) ON UPDATE CASCADE ON DELETE CASCADE,
 		book_loans_DateOut VARCHAR(50) NOT NULL,
 		book_loans_DueDate VARCHAR(50) NOT NULL,
 	);
@@ -76,8 +76,7 @@ GO
 		('W.W. Norton',' W. W. Norton & Company, Inc., 500 Fifth Avenue, New York, New York 10110','212-354-5500'),
 		('Scholastic','557 Broadway, New York, NY 10012','800-724-6527'),
 		('Bantam','375 Hudson Street, New York, NY 10014','212-366-2000'),
-		('Picador USA','175 Fifth Avenue, New York, NY 10010','646-307-5745')		
-	;
+		('Picador USA','175 Fifth Avenue, New York, NY 10010','646-307-5745');
 
 	SELECT * FROM tbl_publisher
 
@@ -110,27 +109,26 @@ GO
 	INSERT INTO tbl_borrower
 		(borrower_StudentID, borrower_BorrowerName, borrower_BorrowerPhone)
 		VALUES
-		('2014027','Andrew Chan','92337601'),
-		('2013038','Janice Yip','93254124'),
-		('2014107','Rain Li','95313257'),
-		('2015023','Angela Choi','59132127'),
-		('2013179','Harry Yuen','51245522'),
-		('2014098','Jeffrey Chan','63173418'),
-		('2013062','Hailey Lam','57329935'),
-		('2014021','Michael Ho','98311513'),
-    ('2014087','Michelle Cheung','57345119'),
-    ('2014012','Nate Cai','97038513'),
-    ('2015102','Martin Wong','52379130'),
-    ('2013121','Cherry Ng','27093178'),
-    ('2013121','Alvin Cheng','90624733'),
-    ('2014097','John Hsieh','51299319'),
-    ('2013079','Kevin Pong','91359122'),
-    ('2013088','Trevor Tong','57318372'),
-    ('2015066','Kelvin Tsang','90772834'),
-    ('2014110','Keith Szeto','97356348'),
-    ('2015106','Edgar Sze','51374283'),
-    ('2014105','Scarlett Chu','91308077')
-    ;
+		('2014027','Andrew, Chan Yau Chi','92337601'),
+		('2013038','Janice, Yip Man Hei','93254124'),
+		('2014107','Rain, Li Sin Choi','95313257'),
+		('2015023','Angela, Choi Yuet Seung','59132127'),
+		('2013179','Harry, Yuen Yat Chi','51245522'),
+		('2014098','Jeffrey, Chan Kei Shun','63173418'),
+		('2013062','Hailey, Lam Hoi Ling','57329935'),
+		('2014021','Michael, Ho Chun Yuen','98311513'),
+		('2014087','Michelle, Cheung Ching Yuet','57345119'),
+		('2014012','Nathan, Cai Zhen Heng','97038513'),
+		('2015102','Martin, Wong Tin Wing','52379130'),
+		('2013121','Cherry, Ng Suk Ying','27093178'),
+		('2013121','Alvin, Cheng Chun Hei','90624733'),
+		('2014097','John, Hsieh Tong Sang','51299319'),
+		('2013079','Kevin, Pong Ka Hong','91359122'),
+		('2013088','Trevor, Tong Yuen Ho','57318372'),
+		('2015066','Kelvin, Tsang Kai Shun','90772834'),
+		('2014110','Keith, Szeto Chun Long','97356348'),
+		('2015106','Edgar, Sze Yat Hei','51374283'),
+		('2014105','Scarlett, Chu Lai Ying','91308077');
 
 	SELECT * FROM tbl_borrower
 
