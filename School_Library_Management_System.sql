@@ -18,7 +18,7 @@ CREATE PROCEDURE dbo.LibraryManagementSystemProcedure
 	CREATE TABLE tbl_borrower (
 		borrower_StudentID INT PRIMARY KEY NOT NULL,
 		borrower_BorrowerName VARCHAR(100) NOT NULL,
-		borrower_BorrowerPhone VARCHAR(50) NOT NULL,
+		borrower_BorrowerPhone VARCHAR(50) NOT NULL
 	);
 
 	SELECT * FROM tbl_borrower
@@ -28,7 +28,7 @@ CREATE PROCEDURE dbo.LibraryManagementSystemProcedure
 		book_loans_BookID INT NOT NULL CONSTRAINT fk_book_id1 FOREIGN KEY REFERENCES tbl_book(book_BookID) ON UPDATE CASCADE ON DELETE CASCADE,
 		book_loans_StudentID INT NOT NULL CONSTRAINT fk_studentid FOREIGN KEY REFERENCES tbl_borrower(borrower_StudentID) ON UPDATE CASCADE ON DELETE CASCADE,
 		book_loans_DateOut VARCHAR(50) NOT NULL,
-		book_loans_DueDate VARCHAR(50) NOT NULL,
+		book_loans_DueDate VARCHAR(50) NOT NULL
 	);
 
 	SELECT * FROM tbl_book_loans
@@ -37,7 +37,7 @@ CREATE PROCEDURE dbo.LibraryManagementSystemProcedure
 	CREATE TABLE tbl_book_copies (
 		book_copies_CopiesID INT PRIMARY KEY NOT NULL IDENTITY (1,1),
 		book_copies_BookID INT NOT NULL CONSTRAINT fk_book_id2 FOREIGN KEY REFERENCES tbl_book(book_BookID) ON UPDATE CASCADE ON DELETE CASCADE,
-		book_copies_No_Of_Copies INT NOT NULL,
+		book_copies_No_Of_Copies INT NOT NULL
 	);
 
 	SELECT * FROM tbl_book_copies
@@ -45,7 +45,7 @@ CREATE PROCEDURE dbo.LibraryManagementSystemProcedure
 	CREATE TABLE tbl_book_authors (
 		book_authors_AuthorID INT PRIMARY KEY NOT NULL IDENTITY (1,1),
 		book_authors_BookID INT NOT NULL CONSTRAINT fk_book_id3 FOREIGN KEY REFERENCES tbl_book(book_BookID) ON UPDATE CASCADE ON DELETE CASCADE,
-		book_authors_AuthorName VARCHAR(50) NOT NULL,
+		book_authors_AuthorName VARCHAR(50) NOT NULL
 	);
 
 	SELECT * FROM tbl_book_authors
