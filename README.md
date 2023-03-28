@@ -1,13 +1,7 @@
 # School Library Management System SQL Project
 
-School Name: St. Ephesian's College
+Made By: Tse Tsz Chun John
 
-Subject: ICT
+Project start date: 28 Feb 2023
 
-Made By: Tse Tsz Chun John, 4H (11)
-
-With Assistance of teacher Mr. Ma Kai Shing Edward
-
-Project start date: 28 Feb 2018
-
-Project finish date: 31 May 2018
+Project finish date: not yet finished
