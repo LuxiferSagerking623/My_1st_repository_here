@@ -1,21 +1,18 @@
-CREATE PROC dbo.LibraryManagementSystemProcedure
-AS
-CREATE DATABASE db_LibraryManagementSystemDatabase
-
-GO
+CREATE PROCEDURE dbo.LibraryManagementSystemProcedure
+	CREATE DATABASE db_LibraryManagementSystemDatabase
 	/* ======================= TABLES ========================*/
 
 
 	CREATE TABLE tbl_publisher (
 		publisher_PublisherName VARCHAR(100) PRIMARY KEY NOT NULL,
 		publisher_PublisherAddress VARCHAR(200) NOT NULL,
-		publisher_PublisherPhone VARCHAR(50) NOT NULL,
+		publisher_PublisherPhone VARCHAR(50) NOT NULL
 	);
 
 	CREATE TABLE tbl_book (
 		book_BookID INT PRIMARY KEY NOT NULL IDENTITY (1,1),
 		book_Title VARCHAR(100) NOT NULL,
-		book_PublisherName VARCHAR(100) NOT NULL CONSTRAINT fk_publisher_name1 FOREIGN KEY REFERENCES tbl_publisher(publisher_PublisherName) ON UPDATE CASCADE ON DELETE CASCADE,
+		book_PublisherName VARCHAR(100) NOT NULL CONSTRAINT fk_publisher_name1 FOREIGN REFERENCES tbl_publisher(publisher_PublisherName) ON UPDATE CASCADE ON DELETE CASCADE
 	);
 
 	CREATE TABLE tbl_borrower (
@@ -53,10 +50,10 @@ GO
 
 	SELECT * FROM tbl_book_authors
 
-/*======================== END TABLES ======================*/
+	/*======================== END TABLES ======================*/
 
 
-/*==================== POPULATING TABLES ======================*/
+	/*==================== POPULATING TABLES ======================*/
 
 	INSERT INTO tbl_publisher
 		(publisher_PublisherName, publisher_PublisherAddress, publisher_PublisherPhone)
@@ -104,14 +101,14 @@ GO
 		('A Game of Thrones', 'Bantam'),
 		('The Lost Tribe', 'Picador USA');
 
-	SELECT * FROM tbl_book WHERE book_PublisherName = 'George Allen & Unwin'
+	SELECT * FROM tbl_book
 
 	INSERT INTO tbl_borrower
 		(borrower_StudentID, borrower_BorrowerName, borrower_BorrowerPhone)
 		VALUES
 		('2014027','Andrew, Chan Yau Chi','92337601'),
 		('2013038','Janice, Yip Man Hei','93254124'),
-		('2014107','Rain, Li Sin Choi','95313257'),
+		('2014107','Rain, Lin Sin Choi','95313257'),
 		('2015023','Angela, Choi Yuet Seung','59132127'),
 		('2013179','Harry, Yuen Yat Chi','51245522'),
 		('2014098','Jeffrey, Chan Kei Shun','63173418'),
@@ -237,7 +234,7 @@ END
 
 /* #1- How many copies of the book titled "The Lost Tribe" are owned by the library branch whose name is "Sharpstown"? */
 
-CREATE PROC dbo.bookCopiesAtAllSharpstown 
+CREATE PROCEDURE dbo.bookCopiesAtAllSharpstown 
 (@bookTitle varchar(70) = 'The Lost Tribe', @branchName varchar(70) = 'Sharpstown')
 AS
 SELECT copies.book_copies_BranchID AS [Branch ID], branch.library_branch_BranchName AS [Branch Name],
@@ -253,7 +250,7 @@ EXEC dbo.bookCopiesAtAllSharpstown
 
 /* #2- How many copies of the book titled "The Lost Tribe" are owned by each library branch? */
 
-CREATE PROC dbo.bookCopiesAtAllBranches 
+CREATE PROCEDURE dbo.bookCopiesAtAllBranches 
 (@bookTitle varchar(70) = 'The Lost Tribe')
 AS
 SELECT copies.book_copies_BranchID AS [Branch ID], branch.library_branch_BranchName AS [Branch Name],
@@ -269,7 +266,7 @@ EXEC dbo.bookCopiesAtAllBranches
 
 /* #3- Retrieve the names of all borrowers who do not have any books checked out. */
 
-CREATE PROC dbo.NoLoans
+CREATE PROCEDURE dbo.NoLoans
 AS
 SELECT borrower_BorrowerName FROM tbl_borrower
 	WHERE NOT EXISTS
@@ -280,7 +277,7 @@ EXEC dbo.NoLoans
 
 /* #4- For each book that is loaned out from the "Sharpstown" branch and whose DueDate is today, retrieve the book title, the borrower's name, and the borrower's address.  */
 
-CREATE PROC dbo.LoanersInfo 
+CREATE PROCEDURE dbo.LoanersInfo 
 (@DueDate date = NULL, @LibraryBranchName varchar(50) = 'Sharpstown')
 AS
 SET @DueDate = GETDATE()
@@ -297,7 +294,7 @@ EXEC dbo.LoanersInfo
 
 /* #5- For each library branch, retrieve the branch name and the total number of books loaned out from that branch.  */
 
-CREATE PROC dbo.TotalLoansPerBranch
+CREATE PROCEDURE dbo.TotalLoansPerBranch
 AS
 SELECT  Branch.library_branch_BranchName AS [Branch Name], COUNT (Loans.book_loans_BranchID) AS [Total Loans]
 		FROM tbl_book_loans AS Loans
@@ -308,7 +305,7 @@ EXEC dbo.TotalLoansPerBranch
 
 /* #6- Retrieve the names, addresses, and number of books checked out for all borrowers who have more than five books checked out. */
 
-CREATE PROC dbo.BooksLoanedOut
+CREATE PROCEDURE dbo.BooksLoanedOut
 (@BooksCheckedOut INT = 5)
 AS
 	SELECT Borrower.borrower_BorrowerName AS [Borrower Name], Borrower.borrower_BorrowerAddress AS [Borrower Address],
@@ -324,7 +321,7 @@ EXEC dbo.BooksLoanedOut
 
 /* #7- For each book authored by "Stephen King", retrieve the title and the number of copies owned by the library branch whose name is "Central".*/
 
-CREATE PROC dbo.BookbyAuthorandBranch
+CREATE PROCEDURE dbo.BookbyAuthorandBranch
 	(@BranchName varchar(50) = 'Central', @AuthorName varchar(50) = 'Stephen King')
 AS
 	SELECT Branch.library_branch_BranchName AS [Branch Name], Book.book_Title AS [Title], Copies.book_copies_No_Of_Copies AS [Number of Copies]
